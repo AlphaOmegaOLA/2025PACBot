@@ -17,13 +17,23 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.config.SparkMaxConfig;
+
 
 public class DriveSubsystem extends SubsystemBase 
 {
-  private final PWMSparkMax m_frontLeft = new PWMSparkMax(DriveConstants.kFrontLeftMotorPort);
+  /*private final PWMSparkMax m_frontLeft = new PWMSparkMax(DriveConstants.kFrontLeftMotorPort);
   private final PWMSparkMax m_rearLeft = new PWMSparkMax(DriveConstants.kRearLeftMotorPort);
   private final PWMSparkMax m_frontRight = new PWMSparkMax(DriveConstants.kFrontRightMotorPort);
   private final PWMSparkMax m_rearRight = new PWMSparkMax(DriveConstants.kRearRightMotorPort);
+  */
+  private final SparkMax m_frontLeft = new SparkMax(DriveConstants.kFrontLeftMotorPort, MotorType.kBrushless);
+  private final SparkMax m_rearLeft = new SparkMax(DriveConstants.kRearLeftMotorPort, MotorType.kBrushless);
+  private final SparkMax m_frontRight = new SparkMax(DriveConstants.kFrontRightMotorPort, MotorType.kBrushless);
+  private final SparkMax m_rearRight = new SparkMax(DriveConstants.kRearRightMotorPort, MotorType.kBrushless);
+  m_frontLeft.inverted(true);
 
   private final MecanumDrive m_drive =
       new MecanumDrive(m_frontLeft::set, m_rearLeft::set, m_frontRight::set, m_rearRight::set);
